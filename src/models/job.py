@@ -3,7 +3,8 @@ from typing import List, Optional
 from pydantic import BaseModel
 from enum import Enum
 
-from models.cleaner import Skill #?
+from src.models.cleaner import Skill
+
 
 
 class Priority(str, Enum):

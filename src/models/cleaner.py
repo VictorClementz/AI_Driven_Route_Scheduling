@@ -23,7 +23,7 @@ class Cleaner(BaseModel):
     home_address: str
     home_coordinates: tuple[float, float]
     skills: List[Skill]
-    languages: list[str] = []
+    languages: list[str] = [] #Fixa sen
     working_hours: WorkingHours
     max_daily_hours: float = 8.0
     hourly_rate: Optional[float] = None

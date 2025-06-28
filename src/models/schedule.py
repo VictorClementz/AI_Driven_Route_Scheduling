@@ -17,7 +17,7 @@ class DailySchedule(BaseModel):
     assignments: List[Assignment]
     total_work_hours: float
     total_travel_hours: float
-    total_day_length: float  # work + travel
+    total_day_length: float  
 
     def is_valid(self, max_day_length: float = 9.0) -> bool:
         return self.total_day_length <= max_day_length
