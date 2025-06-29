@@ -10,6 +10,7 @@ class Assignment(BaseModel):
     travel_time_to_job: float
     travel_time_from_job: float
     sequence_order: int
+    is_lunch_break: bool = False
 
 class DailySchedule(BaseModel):
     cleaner_id: str
@@ -17,7 +18,7 @@ class DailySchedule(BaseModel):
     assignments: List[Assignment]
     total_work_hours: float
     total_travel_hours: float
-    total_day_length: float  
+    total_day_length: float
 
     def is_valid(self, max_day_length: float = 9.0) -> bool:
         return self.total_day_length <= max_day_length

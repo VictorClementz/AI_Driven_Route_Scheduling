@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
@@ -6,9 +9,20 @@ from datetime import datetime
 from ..models.cleaner import Cleaner
 from ..models.job import Job
 from ..models.schedule import ScheduleOptimizationResult
-from ..services.assignment_service import SimpleAssignmentService
+from ..services.assignment_service import OptimizedAssignmentService
 from ..data.dummy import DummyDataGenerator
+from ..services.distance_service import DistanceService
+from ..services.road_distance_service import RoadDistanceService
+import os
 
+
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")  # Set this in your .env file
+if GOOGLE_MAPS_API_KEY:
+    distance_service = RoadDistanceService(GOOGLE_MAPS_API_KEY)
+else:
+    distance_service = DistanceService()  # Fallback to geodesic
+
+assignment_service = OptimizedAssignmentService(distance_service)
 app = FastAPI()
 
 
@@ -23,7 +37,7 @@ app.add_middleware(
 # ska byta till postgres eller nått senare
 cleaners_db = DummyDataGenerator.create_cleaners()
 jobs_db = DummyDataGenerator.create_jobs()
-assignment_service = SimpleAssignmentService()
+#assignment_service = SimpleAssignmentService()
 
 @app.get("/api/cleaners", response_model=List[Cleaner])
 async def get_cleaners():
