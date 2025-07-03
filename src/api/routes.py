@@ -9,7 +9,7 @@ from datetime import datetime
 from ..models.cleaner import Cleaner
 from ..models.job import Job
 from ..models.schedule import ScheduleOptimizationResult
-from ..services.assignment_service import OptimizedAssignmentService
+from src.services.temp.assignment_service import OptimizedAssignmentService
 from ..data.dummy import DummyDataGenerator
 from ..services.distance_service import DistanceService
 from ..services.road_distance_service import RoadDistanceService
